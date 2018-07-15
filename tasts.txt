@@ -1,0 +1,6 @@
+1. integrate existing code in public folder and make it work
+2. call the analyzeTone function from the front-end code
+3. request news from nodeJS 
+    URL handler /getNews
+4. front end code should call /getNews endpoint
+5. put news in array and present it to user -- take json and change it so that it works
