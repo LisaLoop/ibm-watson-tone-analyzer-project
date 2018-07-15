@@ -1,0 +1,20 @@
+{
+  "name": "final-project",
+  "version": "1.0.0",
+  "main": "toneAnalyzer.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LisaLoop/ibm-watson-tone-analyzer-project.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LisaLoop/ibm-watson-tone-analyzer-project/issues"
+  },
+  "homepage": "https://github.com/LisaLoop/ibm-watson-tone-analyzer-project#readme",
+  "description": ""
+}
