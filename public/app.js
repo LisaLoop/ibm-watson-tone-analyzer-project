@@ -55,21 +55,21 @@ let url = 'http://localhost:3000/getNews';
     
     
           // When the user selects an article's title, the app should show the #popUp overlay. 
+
           // The content of the article must be inserted in the .container class inside #popUp. Make sure you remove the 
           // .loader class when toggling the article information in the pop up.
-    
-          //returns HTML collection -- not array
-          let articleEl = document.getElementsByClassName("article");
-          // converts collection to array 
-          let articleArr = Array.from(articleEl);
-          console.log(articleArr);
-          articleArr.forEach(function(e){
-            e.addEventListener('click', function(){
-              // console.log("click");
-              e.id = "popUp";
-              console.log(e.id);
-            });
+          $("h3").on('click', function(){
+            $("#popUp").removeClass("loader");
+            $("#popUp").removeClass("hidden");
+
           })
+
+          $(".closePopUp").on('click', function(){
+            $("#popUp").addClass("hidden");
+          })
+ 
+         
+          
       }
     });
     
