@@ -1,6 +1,3 @@
-
-
-
 function deg2rad(deg){
     return deg * Math.PI / 180;
 }
@@ -12,6 +9,7 @@ function line(ctx,sx,sy,ex,ey,color){
         ctx.lineTo(ex,ey);
         ctx.stroke();
 }
+
 function draw_regular_polygon(cx,cy,sideLength,color, sides){
   var c=document.getElementById("news1");
     var ctx=c.getContext("2d");
@@ -29,8 +27,7 @@ function draw_regular_polygon(cx,cy,sideLength,color, sides){
 
         var realCornerX = cx + cornerX;
         var realCornerY = cy + cornerY;
-        console.log(initial + " : " + theta);
-
+        // console.log(initial + " : " + theta);
 
         line(ctx, prevCornerX,prevCornerY , realCornerX,realCornerY,color);
         
@@ -115,18 +112,11 @@ function radar_chart(ctx,values, labels){
 function init(values, labels){
     var c=document.getElementById("news1");
     var ctx=c.getContext("2d");
-    ctx.clearRect(0, 0, c.width, c.height);
-
-    
-    // var values = [0.9,0.2,0.2,0.8,0.5];
-    // var values = [0.9,0.2,0.2,0.8,0.5, 0.9,0.9,0.9,0.9,0.9];
-    
+    ctx.clearRect(0, 0, c.width, c.height);    
     var c1 = {x:10,y:10};
     var c2 = {x:20,y:20};
     var c3 = {x:20,y:10};
     var c4 = {x:5,y:5};
     var points = [c1,c2,c3,c4];
-    //draw_polygon(ctx,points);
     radar_chart(ctx,values, labels);
 }
-// window.onload = init;

@@ -19,20 +19,21 @@
             <a href="#"><h1>😠 😂 😢 😣 😨 Tonely</h1></a>
             <nav>
               <ul>
-                <li><a href="#"> Sort News by Tone </a>
+                <li><a href="#"> Filter News by Tone </a>
                   <ul>
-                      <li><a href="#">😠 Anger</a></li>
-                      <li><a href="#">😂 Joy</a></li>
-                      <li><a href="#">😢 Sadness</a></li>
-                      <li><a href="#">😣 Disgust</a></li>
-                      <li><a href="#">😨 Fear</a></li>
+                    <li><a onclick="filterNewsByTone(null)" href="#">Show all</a></li>
+                    <li><a onclick="filterNewsByTone('anger')" href="#">😠 Anger</a></li>
+                    <li><a onclick="filterNewsByTone('joy')" href="#">😂 Joy</a></li>
+                    <li><a onclick="filterNewsByTone('sadness')" href="#">😢 Sadness</a></li>
+                    <li><a onclick="filterNewsByTone('disgust')" href="#">😣 Disgust</a></li>
+                    <li><a onclick="filterNewsByTone('fear')" href="#">😨 Fear</a></li>
                   </ul>
                 </li>
               </ul>
-              <section id="search">
+              <!-- <section id="search">
                 <input type="text" name="name" value="">
                 <a href="#"><img src="images/search.png" alt="" /></a>
-              </section>
+              </section> -->
             </nav>
             <div class="clearfix"></div>
           </section>

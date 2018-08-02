@@ -4,18 +4,19 @@ let url = 'http://localhost:3000/getNews';
 function showNews(res) {
   let articles = res; // articles variable
   global_articles = articles;
-  // console.log("global_articles is ", global_articles);
+  $("#main").html(''); // set innerHTML
   for (i = 0; i < articles.length; i++) {
     let tone = articles[i].tone.document_tone.tone_categories[0].tones;
-  //  console.log("tone is ", tone);
-    // categoryList.push(tone);
+    let showNewsItem = newsItemShouldBeVisible(tone, global_current_tone);
+  //  console.log("showNewsItem is ", showNewsItem);
+    if (!showNewsItem){
+      continue 
     let toneDescription = showTone(tone);
-    // console.log("toneDescription is ", toneDescription)
     let articleTitle = articles[i].title;
     let imgSrc = articles[i].urlToImage;
     let articleDescription = articles[i].description;
 
-      let template = `<article class="article" data-id="${i}">
+    let template = `<article class="article" data-id="${i}">
           <section class="featuredImage">
             <img src="${imgSrc}" alt="" />
           </section>
@@ -52,14 +53,7 @@ function showArticle(idx) {
   let emojiArray = tonesToLabels(categoryList);
   init(toneArray, emojiArray);
 };
-var global_articles = [];
-
-$.ajax({
-  url: url,
-  type: 'GET',
-  success: showNews
-});
-
+let global_articles = [];
 
 function emotionToEmoji(emotion){
   let emotionMap = {};
@@ -78,12 +72,10 @@ function showTone(categoryList){
   maxScore = Math.round(maxScore * 100);
   let maxName = categoryList[0].tone_name;
   let maxMax = maxName + " - " + maxScore + " " + emotionToEmoji(maxName);
-  // console.log(maxMax);
   return maxMax;
 };
 
 function tonesToArray(categoryList){
-  // console.log("categoryList ", categoryList);
   let scoresArray = [];
   for(let i=0; i<categoryList.length; i++){
     scoresArray.push(categoryList[i].score);
@@ -98,3 +90,34 @@ function tonesToLabels(categoryList){
   }
   return emojiArray
 }
+
+
+let global_current_tone = null;
+
+function filterNewsByTone(tone){
+  global_current_tone = tone;
+  renderNews();
+} 
+
+function newsItemShouldBeVisible(categoryList, tone){
+  categoryList.sort(function(tone1,tone2) {return tone2.score - tone1.score} );
+  let maxName = categoryList[0].tone_name.toLowerCase();
+  if(tone === null ){
+    return true // show everything, default
+  }
+  if (tone == maxName){
+    return true;
+  } 
+  return false;
+};
+
+
+function renderNews(){
+  $.ajax({
+    url: url,
+    type: 'GET',
+    success: showNews
+  });
+}
+
+window.onload = renderNews;
