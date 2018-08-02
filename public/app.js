@@ -8,9 +8,9 @@ function showNews(res) {
   for (i = 0; i < articles.length; i++) {
     let tone = articles[i].tone.document_tone.tone_categories[0].tones;
   //  console.log("tone is ", tone);
-    categoryList.push(tone);
+    // categoryList.push(tone);
     let toneDescription = showTone(tone);
-    console.log("toneDescription is ", toneDescription);
+    // console.log("toneDescription is ", toneDescription)
     let articleTitle = articles[i].title;
     let imgSrc = articles[i].urlToImage;
     let articleDescription = articles[i].description;
@@ -24,7 +24,7 @@ function showNews(res) {
               <h6>${articleDescription || ""}</h6>
           </section>
           <section class="impressions">
-           <h6 class='tone'></h6>
+           <h6 class='tone'>${toneDescription}</h6>
           </section>
           <div class="clearfix"></div>
         </article>`
@@ -47,6 +47,10 @@ function showArticle(idx) {
   $("#popUp .popUpAction").attr("href", article.url);
   $("#popUp").removeClass("hidden");
   $("#popUp").removeClass("loader");
+  let categoryList = article.tone.document_tone.tone_categories[0].tones;
+  let toneArray = tonesToArray(categoryList);
+  let emojiArray = tonesToLabels(categoryList);
+  init(toneArray, emojiArray);
 };
 var global_articles = [];
 
@@ -56,31 +60,41 @@ $.ajax({
   success: showNews
 });
 
-categoryList = [];
-categoryList.sort(function(tone1,tone2) {return tone2.score - tone1.score} );
+
+function emotionToEmoji(emotion){
+  let emotionMap = {};
+  emotionMap['disgust'] = "😣";
+  emotionMap['fear'] = "😨";
+  emotionMap['joy'] = "😂";
+  emotionMap['anger'] = "😠";
+  emotionMap['sadness'] = "😢";
+  emotion = emotion.toLowerCase();
+  return emotionMap[emotion];
+}
 
 function showTone(categoryList){
+  categoryList.sort(function(tone1,tone2) {return tone2.score - tone1.score} );
   let maxScore = categoryList[0].score;
+  maxScore = Math.round(maxScore * 100);
   let maxName = categoryList[0].tone_name;
-  for(var i=0; i<categoryList.length; i++){
-    // console.log("global articles titles", global_articles[i].title);
-    let toneName = categoryList[i].tone_name;
-    let toneScore = categoryList[i].score;
-    // console.log(toneName + " score is " + toneScore);
-    // console.log("is this happening?");
-    if(toneScore >= maxScore){
-      // console.log("is this happening?");
-    //   console.log("toneScore is ", toneScore);
-      maxName  = categoryList[i].tone_name;
-      maxScore = categoryList[i].score;
-      let maxScoreArr = [];
-      maxScoreArr.push({"maxName": maxName, "maxScore": maxScore});
-      // console.log("maxScoreArr is ", maxScoreArr);
-      console.log(maxName + " - " + maxScore);
-      // console.log("global articles is ", global_articles);
-    } 
-  };
-  
-  return ''
+  let maxMax = maxName + " - " + maxScore + " " + emotionToEmoji(maxName);
+  // console.log(maxMax);
+  return maxMax;
 };
 
+function tonesToArray(categoryList){
+  // console.log("categoryList ", categoryList);
+  let scoresArray = [];
+  for(let i=0; i<categoryList.length; i++){
+    scoresArray.push(categoryList[i].score);
+  }
+  return scoresArray
+}
+
+function tonesToLabels(categoryList){
+  let emojiArray = [];
+  for(let i=0; i<categoryList.length; i++){
+    emojiArray.push(emotionToEmoji(categoryList[i].tone_name));
+  }
+  return emojiArray
+}

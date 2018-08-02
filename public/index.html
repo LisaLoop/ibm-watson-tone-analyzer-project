@@ -3,7 +3,7 @@
     <head>
       <meta charset="utf-8">
       <meta http-equiv="x-ua-compatible" content="ie=edge">
-      <title>Feedr @ GA</title>
+      <title>Tonely: Sort News by Tone </title>
       <link rel="stylesheet" href="styles/normalize.css" media="screen" charset="utf-8">
       <link rel="stylesheet" href="styles/html5bp.css" media="screen" charset="utf-8">
       <link rel="stylesheet" href="styles/style.css" media="screen" charset="utf-8">
@@ -16,14 +16,16 @@
         <![endif]-->
         <header>
           <section class="container">
-            <a href="#"><h1>Feedr</h1></a>
+            <a href="#"><h1>😠 😂 😢 😣 😨 Tonely</h1></a>
             <nav>
               <ul>
-                <li><a href="#">News Source: <span>Source Name</span></a>
+                <li><a href="#"> Sort News by Tone </a>
                   <ul>
-                      <li><a href="#">Source 1</a></li>
-                      <li><a href="#">Source 2</a></li>
-                      <li><a href="#">Source 3</a></li>
+                      <li><a href="#">😠 Anger</a></li>
+                      <li><a href="#">😂 Joy</a></li>
+                      <li><a href="#">😢 Sadness</a></li>
+                      <li><a href="#">😣 Disgust</a></li>
+                      <li><a href="#">😨 Fear</a></li>
                   </ul>
                 </li>
               </ul>
@@ -42,13 +44,15 @@
             <p>
               Article description/content here.
             </p>
+            <canvas width="400" height="400" id="news1"></canvas>
+
             <a href="#" class="popUpAction" target="_blank">Read more from source</a>
           </div>
         </div>
         <section id="main" class="container">
-
+          <!-- articles go here -->
         </section>
-
+        <script src='radial/radial.js'></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.3.min.js"><\/script>')</script>
         <script src="app.js"></script>
